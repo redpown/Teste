@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201109135934_v001.cs" />
+    <Compile Remove="Migrations\20201109135934_v001.Designer.cs" />
+    <Compile Remove="Migrations\20201109141327_v001.cs" />
+    <Compile Remove="Migrations\20201109141327_v001.Designer.cs" />
+    <Compile Remove="Migrations\20201109142349_v001.cs" />
+    <Compile Remove="Migrations\20201109142349_v001.Designer.cs" />
+    <Compile Remove="Migrations\20201109143241_v001.cs" />
+    <Compile Remove="Migrations\20201109143241_v001.Designer.cs" />
+    <Compile Remove="Migrations\20201109144007_v001.cs" />
+    <Compile Remove="Migrations\20201109144007_v001.Designer.cs" />
+    <Compile Remove="Migrations\20201109144349_v001.cs" />
+    <Compile Remove="Migrations\20201109144349_v001.Designer.cs" />
+    <Compile Remove="Migrations\20201109153233_v001.cs" />
+    <Compile Remove="Migrations\20201109153233_v001.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TesteDev.Domain\TesteDev.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
