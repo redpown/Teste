@@ -12,7 +12,8 @@ import { IngredientesServicos } from "../servicos/ingredientes/ingredientes.serv
 
 export class TesteComponent implements OnInit {
     public alface:     number = 0;
-    public alfaceDesconto:     number = 0;
+  public alfaceDesconto: number = 0;
+    public valorLanche: number = 0;
     public baccon:     number = 0;
     public humburguer: number = 0;
     public ovo:        number = 0;
@@ -44,25 +45,26 @@ export class TesteComponent implements OnInit {
 
       }
 
-    Adicionar(item: Ingredientes) {
+  Adicionar(item: Ingredientes) {
+    if (this.valorLanche > 0) {
       item.quantidade++;
       //-----------alface
       if (item.tipo == '1') {
-      
+
         this.alface++;
         if ((this.alface >= 1) && (this.baccon === 0)) {
-        
-          this.valorTotal += item.valor;
-          this.alfaceDesconto += item.valor * 0.10;
-          this.desconto += item.valor * 0.10;
-          this.valorTotal -= item.valor * 0.10;
+          this.desconto -= this.alfaceDesconto ;
+          this.valorTotal += (item.valor + this.alfaceDesconto);
+          this.alfaceDesconto = this.valorTotal * 0.10;
+          this.desconto += this.alfaceDesconto ;
+          this.valorTotal -= this.valorTotal * 0.10;
         } else {
-       
+
           this.desconto = this.desconto - this.alfaceDesconto;
-          this.valorTotal = this.valorTotal - this.alfaceDesconto;
+          this.valorTotal = this.valorTotal + this.alfaceDesconto;
           this.alfaceDesconto = 0.00;
           this.valorTotal += item.valor;
-       
+
         }
       }
       //-----------baccon
@@ -72,14 +74,14 @@ export class TesteComponent implements OnInit {
         this.valorTotal = this.valorTotal + this.alfaceDesconto;
         this.alfaceDesconto = 0.00;
         this.valorTotal += item.valor;
-      
+
       }
       //-----------humburguer
       else if (item.tipo == '3') {
         this.humburguer++;
-      
+
         if ((this.humburguer > 0) && (item.quantidade % 3 == 0)) {
-          this.desconto   += item.valor;
+          this.desconto += item.valor;
           this.valorTotal += item.valor;
           this.valorTotal -= item.valor;
         } else {
@@ -89,27 +91,27 @@ export class TesteComponent implements OnInit {
       //-----------ovo
       else if (item.tipo == '4') {
         this.ovo++;
-      
+
         this.valorTotal += item.valor;
-      
+
       }
-       //-----------queijo
+      //-----------queijo
       else if (item.tipo == '5') {
         this.queijo++;
-      
+
         if ((this.queijo >= 3) && (item.quantidade % 3 == 0)) {
           this.desconto += item.valor;
           this.valorTotal += item.valor;
           this.valorTotal -= item.valor;
 
-        } else {this.valorTotal += item.valor;}
+        } else { this.valorTotal += item.valor; }
       }
-      
+    } 
     }
 
     Remover(item: Ingredientes) {
 
-      if (item.quantidade > 0) {
+      if ((item.quantidade > 0) && (this.valorLanche>0)) {
 
           if ((item.tipo == '2') && (this.baccon>0)) {
             this.baccon--;
@@ -136,9 +138,19 @@ export class TesteComponent implements OnInit {
           if (this.baccon > 0) {
             this.valorTotal -= item.valor ;
           } else {
-            this.desconto -= item.valor * 0.10;
-            this.alfaceDesconto -= item.valor * 0.10;
-            this.valorTotal = (this.valorTotal - (item.valor - (item.valor * 0.10)));
+            if (item.quantidade > 1) {
+              this.desconto -= this.alfaceDesconto;
+              this.valorTotal += this.alfaceDesconto;
+              this.valorTotal -= item.valor;
+              this.alfaceDesconto = this.valorTotal * 0.10;
+              this.desconto += this.alfaceDesconto;
+              this.valorTotal -= this.valorTotal * 0.10;
+            } else {
+              this.desconto -= this.alfaceDesconto;
+              this.valorTotal += this.alfaceDesconto;
+              this.valorTotal -= item.valor;
+            }
+           
           }
 
         }
@@ -152,9 +164,6 @@ export class TesteComponent implements OnInit {
           this.valorTotal = 0.00;
         }
 
-        if (item.tipo == null) {
-          this.valorTotal -= item.valor
-        }
       }
    
   }
@@ -164,14 +173,28 @@ export class TesteComponent implements OnInit {
     if ((item.lanche == 'X-Egg Bacon') || (item.lanche == 'X-Bacon')) {
       this.baccon++;
       this.valorTotal += item.valor
+
     } else {
+      this.valorLanche += item.valor
       this.valorTotal += item.valor
     }
+    item.quantidade++;
 
   }
 
+  RemoverLanches(item: Lanches) {
+
+    if ((item.quantidade > 0)) {
+      this.valorTotal -= item.valor;
+      item.quantidade--;
+    }
+
+    
+
+  }
 
 }
+
 
 
 
