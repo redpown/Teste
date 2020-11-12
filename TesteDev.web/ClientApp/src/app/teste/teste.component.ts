@@ -173,7 +173,7 @@ export class TesteComponent implements OnInit {
     if ((item.lanche == 'X-Egg Bacon') || (item.lanche == 'X-Bacon')) {
       this.baccon++;
       this.valorTotal += item.valor
-
+      this.valorLanche += item.valor
     } else {
       this.valorLanche += item.valor
       this.valorTotal += item.valor
@@ -185,7 +185,8 @@ export class TesteComponent implements OnInit {
   RemoverLanches(item: Lanches) {
 
     if ((item.quantidade > 0)) {
-      this.valorTotal -= item.valor;
+      this.valorTotal  -= item.valor;
+      this.valorLanche -= item.valor
       item.quantidade--;
     }
 
