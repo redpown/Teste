@@ -26,7 +26,7 @@ namespace TesteDev.web
         {
             services.AddDbContext<TesteDevContexto>(option => option
                                                 .UseLazyLoadingProxies()
-                                                .UseSqlServer("Server=uhair.database.windows.net;Database=uhair;User Id=uhair;Password=jjaerp@123;",
+                                                .UseSqlServer(Configuration.GetConnectionString("WebTeste"),
                                                 m => m.MigrationsAssembly("TesteDev.Repository")));
             services.AddScoped<ILanchesRepositorio, LanchesRepositorio>();
             services.AddScoped<IIngredientesRepositorio, IngredientesRepositorio>();
