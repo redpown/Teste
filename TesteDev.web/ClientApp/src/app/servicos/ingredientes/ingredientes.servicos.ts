@@ -24,5 +24,27 @@ export class IngredientesServicos {
   public getIngredientes(): Observable<Ingredientes[]> {
     return this.http.get<Ingredientes[]>(this.baseUrl + "api/Ingredientes")
   }
-    
+
+  getAllCats(): Observable<Ingredientes[]> {
+    return this.http.get<Ingredientes[]>(this.baseUrl + "api/Ingredientes")
+  }
+
+  getIngrediente(Ingrediente: string): Observable<Ingredientes> {
+    return this.http.get<Ingredientes>(this.baseUrl + "api/Ingredientes" + Ingrediente)
+  }
+
+  insertIngrediente(Ingrediente: Ingredientes): Observable<Ingredientes> {
+    return this.http.post<Ingredientes>(this.baseUrl + "api/Ingredientes", Ingredientes)
+  }
+
+  updateIngrediente(Ingredient: Ingredientes): Observable<void> {
+    return this.http.put<void>(
+      this.baseUrl + "api/Ingredientes" + Ingredient.ingrediente,
+      Ingredientes
+    )
+  }
+
+  deleteIngrediente(Ingrediente: string) {
+    return this.http.delete(this.baseUrl + "api/Ingredientes" + Ingrediente)
+  }
 }

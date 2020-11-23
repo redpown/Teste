@@ -22,7 +22,12 @@ namespace TestDev.Repositorios
             
             return _TesteDev.Ingredientes.FirstOrDefault(u => u.ingrediente == ingredienete);
         }
+        /*
+        public IEnumerable<Ingredientes> Buscar(Ingredientes buscado)
+        {
+            return _TesteDev.Ingredientes.AsNoTracking().Where(u=>u.id== buscado.id).ToList();
+        }
+        */
 
-        
     }
 }

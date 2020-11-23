@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TesteDev.Contratos;
 using TesteDev.Entidades;
 
@@ -27,29 +28,39 @@ namespace TesteDev.web.Controllers
             return _IIngredientesRepositorio.ObterTodos();
         }
 
-        // GET api/<ProdutosController>/5
+        // GET api/ingredientes/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<ProdutosController>
+        // POST api/ingredientes
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<ProdutosController>/5
+        // PUT api/ingredientes/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Ingredientes InggredienteAtual)
         {
+            _IIngredientesRepositorio.Atualizar(InggredienteAtual);
         }
 
-        // DELETE api/<ProdutosController>/5
+        // DELETE api/ingredientes/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _IIngredientesRepositorio.Buscar(u=>u.id==id);
+        }
+
+        // HttpGet api/ingredientes/Buscar/{id}
+        [HttpGet("Buscar/{texto}")]
+        public IEnumerable<Ingredientes> Buscar(string texto)
+        {
+            /*W => EF.Functions.Like(W.Titulo, "%foni%")*/
+            return _IIngredientesRepositorio.Buscar(W => EF.Functions.Like(W.ingrediente, "%" + texto + "%"));
         }
     }
 }
